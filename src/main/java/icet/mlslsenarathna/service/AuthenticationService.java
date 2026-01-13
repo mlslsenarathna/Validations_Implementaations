@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 
 public class AuthenticationService {
     AuthenticationRepository authenticationRepository=new AuthenticationRepositoryImpl();
-
+    HashingService hashingService=new HashingService();
     private  final String GMAIL_REGEX = "^[A-Za-z0-9+_.-]+@gmail\\.com$";
     public  boolean isValidGmail(String email) {
         if (email == null) return false;
@@ -21,6 +21,7 @@ public class AuthenticationService {
         return matcher.matches();
     }
 
-    public void checkEmailAndPassword(String userMail, String pword) {
+    public boolean checkEmailAndPassword(String userMail, String pword) {
+        return true;
     }
 }

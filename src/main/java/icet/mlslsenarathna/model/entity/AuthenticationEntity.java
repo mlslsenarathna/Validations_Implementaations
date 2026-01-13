@@ -1,6 +1,8 @@
 package icet.mlslsenarathna.model.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
 
 @Getter
@@ -8,6 +10,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Entity(name = "Authentication")
+@Entity
+@Table(name = "Authentication")
 public class AuthenticationEntity {
+    @Id
+    private String email;
+    private String password;
 }
