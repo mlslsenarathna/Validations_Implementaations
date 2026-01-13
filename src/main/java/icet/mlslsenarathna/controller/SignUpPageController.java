@@ -6,13 +6,18 @@ import icet.mlslsenarathna.service.AuthenticationService;
 import icet.mlslsenarathna.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -43,7 +48,17 @@ public class SignUpPageController implements Initializable {
 
     @FXML
     void btnCancleOnAction(ActionEvent event) {
-
+        try {
+            Stage stage = (Stage) this.btnCancle.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/SignInPageView.fxml"));
+            Parent root =loader.load();
+            SignInPageController signInPageController = loader.getController();
+            stage.setScene(new Scene(root));
+            //stage.setFullScreen(true);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -51,6 +66,17 @@ public class SignUpPageController implements Initializable {
        UserDTO newUser=getUserDetails();
        if(userService.registerNewUser(newUser)){
            JOptionPane.showMessageDialog(null,"Registered Successfully!");
+           try {
+           Stage stage = (Stage) this.btnSignUp.getScene().getWindow();
+           FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/SignInPageView.fxml"));
+           Parent root =loader.load();
+           SignInPageController signInPageController = loader.getController();
+           stage.setScene(new Scene(root));
+           //stage.setFullScreen(true);
+           stage.show();
+           } catch (IOException e) {
+               throw new RuntimeException(e);
+           }
        }
 
     }

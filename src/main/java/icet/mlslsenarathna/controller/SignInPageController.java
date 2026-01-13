@@ -1,6 +1,7 @@
 package icet.mlslsenarathna.controller;
 
 import com.jfoenix.controls.JFXButton;
+import icet.mlslsenarathna.model.dto.AuthenticationDTO;
 import icet.mlslsenarathna.service.AuthenticationService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,38 +37,34 @@ public class SignInPageController  implements Initializable {
     void btnLogInOnAction(ActionEvent event) {
         String userMail=txtEmail.getText().trim();
         String pword=txtPassword.getText().trim();
+        AuthenticationDTO authenticationDTO=new AuthenticationDTO(
+                userMail,
+                pword
+        );
         if(authenticationService.isValidGmail(userMail)){
             if(pword!=null){
-                if(authenticationService.checkEmailAndPassword(userMail,pword)){
-                    try{
-
-                        Stage stage= (Stage) this.btnLogIn.getScene().getWindow();
-                        FXMLLoader loader=new FXMLLoader(this.getClass().getResource("/view/SignUpPage.fxml"));
-                        Parent root=loader.load();
-                        SignInPageController signInPageController=loader.getController();
-
-
+                if(authenticationService.checkEmailAndPassword(authenticationDTO)){
+                    try {
+                        Stage stage = (Stage) this.btnLogIn.getScene().getWindow();
+                        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/HomePageView.fxml"));
+                        Parent root =loader.load();
+                        HomePageViewController homePageViewController = loader.getController();
+                        homePageViewController.transferData(txtEmail.getText().trim());
+                        stage.setScene(new Scene(root));
+                        //stage.setFullScreen(true);
+                        stage.show();
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
 
-//                    try {
-//                        if (authenticatedUser != null) {
-//                            Stage stage = (Stage) this.btnLogIn.getScene().getWindow();
-//                            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/HomePageView.fxml"));
-//                            Parent root = loader.load();
-//                            HomePageController homeController = loader.getController();
-//                            homeController.setLoggedInUser(authenticatedUser);
-//                            stage.setScene(new Scene(root));
-//                            stage.setFullScreen(true);
-//                            stage.show();
-//                        }
-//                    }catch (IOException ex){
-//                        JOptionPane.showMessageDialog(null,"please check password and username");
 //
-//                    }
+                }else {
+                    JOptionPane.showMessageDialog(null,"Invalid password");
                 }
             }
+
+        }else {
+            JOptionPane.showMessageDialog(null,"Invalid Email Informations ");
 
         }
 
@@ -75,6 +72,17 @@ public class SignInPageController  implements Initializable {
 
     @FXML
     void btnSignUpOnAction(ActionEvent event) {
+        try {
+            Stage stage = (Stage) this.btnSignUp.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/SignUpPageView.fxml"));
+            Parent root =loader.load();
+            SignUpPageController signUpPageController = loader.getController();
+            stage.setScene(new Scene(root));
+            //stage.setFullScreen(true);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

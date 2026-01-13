@@ -1,8 +1,8 @@
 package icet.mlslsenarathna.service;
 
-import com.beust.ah.A;
 import icet.mlslsenarathna.model.dto.AuthenticationDTO;
 import icet.mlslsenarathna.model.dto.UserDTO;
+import icet.mlslsenarathna.model.dto.UserDataDTO;
 import icet.mlslsenarathna.model.entity.UserEntity;
 import icet.mlslsenarathna.repository.UserRepository;
 import icet.mlslsenarathna.repository.impl.UserRepositoryImpl;
@@ -24,5 +24,16 @@ public class UserService {
         userRepository.registerUser(userEntity);
         authenticationService.registerAuthentication(authenticationDTO);
         return true;
+    }
+
+    public UserDataDTO getUserDetailsFromEmail(String trim) {
+        UserEntity userEntity=userRepository.getUserByEmail(trim);
+
+        return new UserDataDTO(
+                userEntity.getFirstName(),
+                userEntity.getLastName(),
+                userEntity.getEmail()
+
+        );
     }
 }

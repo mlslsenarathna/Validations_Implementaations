@@ -1,6 +1,7 @@
 package icet.mlslsenarathna.service;
 
 import icet.mlslsenarathna.model.dto.AuthenticationDTO;
+import icet.mlslsenarathna.model.entity.AuthenticationEntity;
 import icet.mlslsenarathna.repository.AuthenticationRepository;
 import icet.mlslsenarathna.repository.impl.AuthenticationRepositoryImpl;
 
@@ -22,9 +23,7 @@ public class AuthenticationService {
         return matcher.matches();
     }
 
-    public boolean checkEmailAndPassword(String userMail, String pword) {
-        return true;
-    }
+
     public boolean isValidPassword(String password){
             String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
 
@@ -40,5 +39,20 @@ public class AuthenticationService {
   }
 
     public void registerAuthentication(AuthenticationDTO authenticationDTO) {
+        authenticationRepository.newRegistration(
+               new AuthenticationEntity(
+                       authenticationDTO.getEmail(),
+                       authenticationDTO.getPassword()
+               ));
+    }
+
+    public boolean checkEmailAndPassword(AuthenticationDTO authenticationDTO) {
+        AuthenticationEntity authenticationEntity=authenticationRepository.getAuthenticationByEmail(authenticationDTO.getEmail());
+        if(authenticationEntity!=null){
+            if (hashingService.checkPassword(authenticationDTO.getPassword(),authenticationEntity.getPassword())){
+                return  true;
+            }
+        }
+        return false;
     }
 }
