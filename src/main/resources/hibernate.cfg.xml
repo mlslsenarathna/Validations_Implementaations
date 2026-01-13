@@ -18,6 +18,7 @@
         <property name="hibernate.default_catalog"></property>
         <property name="hibernate.globally_quoted_identifiers">true</property>
         <mapping class="icet.mlslsenarathna.model.entity.AuthenticationEntity"/>
+        <mapping class="icet.mlslsenarathna.model.entity.UserEntity"/>
 
 
     </session-factory>

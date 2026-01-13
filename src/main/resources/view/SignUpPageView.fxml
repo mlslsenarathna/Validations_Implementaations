@@ -13,7 +13,6 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom right, #4a2c00, #000000);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="icet.mlslsenarathna.controller.SignUpPageController">
    <top>
       <Label alignment="CENTER" contentDisplay="CENTER" text="User Sign Up" textFill="WHITE" BorderPane.alignment="CENTER">
@@ -93,7 +92,7 @@
                       <RowConstraints maxHeight="15.800024414062499" minHeight="6.200036621093751" prefHeight="6.200036621093751" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <JFXButton fx:id="btnSignUp" onAction="#btnSignUpOnAction" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: linear-gradient(to bottom right, #4a2c00, #000000);" text="Sign Up" GridPane.rowIndex="1">
+                        <JFXButton fx:id="btnSignUp" disable="true" onAction="#btnSignUpOnAction" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: linear-gradient(to bottom right, #4a2c00, #000000);" text="Sign Up" GridPane.rowIndex="1">
                            <textFill>
                               <LinearGradient endX="1.0" endY="1.0">
                                  <stops>

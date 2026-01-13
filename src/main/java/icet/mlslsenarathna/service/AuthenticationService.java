@@ -1,5 +1,6 @@
 package icet.mlslsenarathna.service;
 
+import icet.mlslsenarathna.model.dto.AuthenticationDTO;
 import icet.mlslsenarathna.repository.AuthenticationRepository;
 import icet.mlslsenarathna.repository.impl.AuthenticationRepositoryImpl;
 
@@ -23,5 +24,21 @@ public class AuthenticationService {
 
     public boolean checkEmailAndPassword(String userMail, String pword) {
         return true;
+    }
+    public boolean isValidPassword(String password){
+            String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+
+            return password != null && password.matches(passwordRegex);
+
+    }
+
+  public boolean isMatchePassword(String password,String reEntered){
+        if(password.equals(reEntered)){
+            return true;
+        }
+        return false;
+  }
+
+    public void registerAuthentication(AuthenticationDTO authenticationDTO) {
     }
 }
